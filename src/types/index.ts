@@ -1,5 +1,3 @@
-import { Session } from "next-auth";
-
 type User = {
   id: string;
   name?: string | null;
@@ -14,9 +12,14 @@ type Category = {
   id: string;
   slug: string;
   title: string;
-  color: string;
-  img?: string | null;
-  posts: Post[];
+  subcategories: Subcategory[];
+};
+
+type Subcategory = {
+  id: string;
+  slug: string;
+  title: string;
+  categoryId: string;
 };
 
 type Post = {
@@ -26,6 +29,7 @@ type Post = {
   title: string;
   desc: string;
   img?: string | null;
+  videoURL?: string | null;
   views: number;
   likesCount: number;
   catSlug: string;
@@ -46,13 +50,4 @@ type Comment = {
   post: Post;
 };
 
-export type { User, Category, Post, Comment };
-
-export interface SessionInterface extends Session {
-  user: User & {
-    id: string;
-    name: string;
-    email: string;
-    avatarUrl: string;
-  };
-}
+export type { User, Category, Post, Comment, Subcategory };

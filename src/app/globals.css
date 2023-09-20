@@ -18,6 +18,10 @@ h1 {
   @apply text-lg md:text-2xl;
 }
 
+b {
+  @apply font-semibold text-accent;
+}
+
 .ql-container {
   @apply !text-xl md:!text-2xl;
 }

@@ -14,14 +14,16 @@ export default async function Post({ params }: { params: { slug: string } }) {
     post: Post;
   };
 
+  console.log(post);
+
   const data = await getAuthSession();
 
   return (
     <div>
-      <div className="flex flex-col-reverse items-start gap-14 md:flex-row md:items-center">
+      <div className="flex flex-col-reverse items-start gap-14 lg:flex-row lg:items-center">
         <div className="flex-1">
-          <h1 className="pb-12 text-3xl font-semibold md:text-2xl xl:text-5xl">
-            {post.title}
+          <h1 className="pb-12 text-xl font-semibold md:text-2xl xl:text-5xl">
+            {post?.title}
           </h1>
 
           <div className="flex flex-col gap-4">

@@ -1,6 +1,7 @@
 import { CardList, Menu } from "@/components";
-import Search from "@/components/Seach";
-import SelectCategory from "@/components/SelectCategory";
+import { Search, SelectCategory } from "@/components";
+import ClearParamsButton from "@/components/ClearParamsButton";
+
 import { getData } from "@/constants";
 import { Category } from "@/types";
 
@@ -22,12 +23,17 @@ export default async function Blog({ searchParams }: BlogProps) {
     <div>
       <div className="flex w-full gap-x-2 font-light uppercase">
         <h2>Buscar entre:</h2>
-        <h1 className="text-3xl font-semibold uppercase text-accent">{cat}</h1>
+        <h1 className="text-lg font-semibold uppercase text-accent md:text-3xl">
+          {search || cat || "Todos os posts"}
+        </h1>
       </div>
 
       <div className="mt-8 flex flex-col items-center gap-2 md:flex-row">
         <Search placeholder="Busque por postagens" />
-        <SelectCategory categories={categories} cat={cat} />
+        <div className="flex w-full gap-2">
+          <SelectCategory categories={categories} cat={cat} />
+          <ClearParamsButton />
+        </div>
       </div>
 
       <div className="flex gap-14">

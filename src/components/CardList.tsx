@@ -24,14 +24,12 @@ const CardList = async ({ page, cat, search }: CardListProps) => {
     const titleLowerCase = post.title.toLowerCase();
     const descLowerCase = post.desc.toLowerCase();
 
-    const catMatches = !cat || post.catSlug === cat;
-
     const searchMatches =
       !search ||
       titleLowerCase.includes(search.toLowerCase()) ||
       descLowerCase.includes(search.toLowerCase());
 
-    return catMatches && searchMatches;
+    return searchMatches;
   });
 
   return (

@@ -31,7 +31,7 @@ const Card = ({ catSlug, title, desc, createdAt, slug, img }: Post) => {
         </Link>
 
         <p className="text-sm font-light md:text-lg">
-          {removeHTMLTags(desc).substring(0, 100)}..
+          {removeHTMLTags(desc).substring(0, img ? 100 : 180)}..
         </p>
 
         <Link

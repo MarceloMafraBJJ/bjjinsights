@@ -1,6 +1,5 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -36,15 +35,11 @@ const Write = ({ categories, cat, post, type }: WriteProps) => {
   const [file, setFile] = useState<File | null>(null);
   const [media, setMedia] = useState(post?.img || "");
   const [title, setTitle] = useState(post?.title || "");
+  const [videoURL, setVideoURL] = useState(post?.videoURL || "");
   const [description, setDescription] = useState(post?.desc || "");
 
-  const { status } = useSession();
   const router = useRouter();
   const storage = getStorage(app);
-
-  // if (status === "unauthenticated") {
-  // return  router.push("/");
-  // }
 
   useEffect(() => {
     const upload = () => {
@@ -94,6 +89,7 @@ const Write = ({ categories, cat, post, type }: WriteProps) => {
             img: media,
             slug: slugify(title),
             catSlug: cat || post?.cat,
+            videoURL,
           }),
         });
 
@@ -133,7 +129,7 @@ const Write = ({ categories, cat, post, type }: WriteProps) => {
         }),
       });
 
-      toast.success("Imagem excluída com suceso.");
+      toast.success("Imagem excluída com sucesso.");
       router.push(`/posts/${post?.slug}`);
     } catch (err) {
       console.error(err);
@@ -161,12 +157,18 @@ const Write = ({ categories, cat, post, type }: WriteProps) => {
         <input
           type="text"
           placeholder="Título"
-          className="w-[90%] border-none bg-transparent text-3xl text-[#b3b3b1] outline-none md:w-full lg:text-5xl"
+          className="w-[90%] border-none bg-transparent pr-6 text-3xl text-[#b3b3b1] outline-none md:w-full lg:text-5xl"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
         />
 
-        <SelectCategory categories={categories} cat={cat} />
+        <div className="flex flex-col gap-2">
+          <SelectCategory categories={categories} cat={cat} />
+          <span className="text-xs">
+            se a subcategoria não atende a sua necessidade selecione uma
+            categoria genérica.
+          </span>
+        </div>
       </div>
 
       <div
@@ -183,8 +185,8 @@ const Write = ({ categories, cat, post, type }: WriteProps) => {
         )}
 
         {open && (
-          <div className="absolute left-14 z-10 flex flex-col gap-3 bg-white dark:bg-dark_primary">
-            <div className="flex items-center gap-3">
+          <div className="absolute left-14 z-10 flex flex-col gap-3">
+            <div className="flex gap-3">
               <input
                 type="file"
                 id="image"
@@ -194,39 +196,53 @@ const Write = ({ categories, cat, post, type }: WriteProps) => {
                 className="hidden"
               />
               <label htmlFor="image">
-                <div className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-2 border-accent">
-                  <ArrowDownTrayIcon className="h-5 w-5 fill-accent" />
+                <div
+                  className={`relative flex cursor-pointer items-center justify-center rounded-md border-2 border-accent ${
+                    media ? "h-36 w-36" : "h-12 w-12"
+                  }`}
+                >
+                  {media ? (
+                    <Image
+                      src={media}
+                      alt="Post Image"
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <ArrowDownTrayIcon className="h-5 w-5 fill-accent" />
+                  )}
                 </div>
               </label>
 
               <div
                 onClick={() => deleteImage(media)}
-                className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-2 border-accent"
+                className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-md border-2 border-accent"
               >
                 <TrashIcon className="h-5 w-5 fill-accent" />
               </div>
-            </div>
 
-            {media && (
-              <Image
-                src={media}
-                alt="Post Image"
-                width={200}
-                height={200}
-                className="h-[200px] w-[200px] rounded-md object-cover"
+              <input
+                placeholder="Youtube URL: Ex.:https://youtu.be/L2-lSnPlDaQ?si=y-wCLYHIhxC5Uw6E "
+                className="h-12 rounded-md border-2 border-accent bg-transparent px-4 outline-none"
+                onChange={(e) => setVideoURL(e.target.value)}
+                value={videoURL}
               />
-            )}
+            </div>
           </div>
         )}
       </div>
 
-      <ReactQuill
-        theme="bubble"
-        value={description}
-        onChange={setDescription}
-        placeholder="Escreva sua história..."
-        className="mx-auto mt-6 min-h-[600px]"
-      />
+      {!open ? (
+        <ReactQuill
+          theme="bubble"
+          value={description}
+          onChange={setDescription}
+          placeholder="Escreva sua história..."
+          className="mx-auto mt-6 min-h-[600px]"
+        />
+      ) : (
+        <div className="min-h-[600px]" />
+      )}
 
       <button
         onClick={handleSubmit}

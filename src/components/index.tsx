@@ -10,7 +10,10 @@ import MenuCategories from "./MenuCategories";
 
 import Navbar from "./Navbar";
 import Pagination from "./Pagination";
+import Search from "./Search";
+import SelectCategory from "./SelectCategory";
 import ThemeToggle from "./ThemeToggle";
+import Write from "./Write";
 
 export {
   Card,
@@ -24,5 +27,8 @@ export {
   MenuCategories,
   Navbar,
   Pagination,
+  Search,
+  SelectCategory,
   ThemeToggle,
+  Write,
 };

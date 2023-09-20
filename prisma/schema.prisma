@@ -59,14 +59,6 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Category {
-  id    String @id @default(cuid()) @map("_id")
-  slug  String @unique
-  title String
-
-  Posts Post[]
-}
-
 model Post {
   id         String   @id @default(cuid()) @map("_id")
   createdAt  DateTime @default(now())
@@ -74,6 +66,7 @@ model Post {
   title      String
   desc       String
   img        String?
+  videoURL   String?
   views      Int      @default(0)
   likesCount Int      @default(0)
   catSlug    String
@@ -83,6 +76,24 @@ model Post {
   user     User      @relation(fields: [userEmail], references: [email])
   comments Comment[]
   Like     Like[]
+}
+
+model Category {
+  id    String @id @default(cuid()) @map("_id")
+  slug  String @unique
+  title String
+
+  subcategories Subcategory[]
+  Posts         Post[]
+}
+
+model Subcategory {
+  id         String @id @default(cuid()) @map("_id")
+  slug       String @unique
+  title      String
+  categoryId String
+
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 }
 
 model Comment {

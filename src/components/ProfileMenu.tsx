@@ -85,7 +85,10 @@ const ProfileMenu = () => {
                   </Menu.Item>
 
                   <Menu.Item>
-                    <Link href={`/write`} className="text-sm">
+                    <Link
+                      href={`/posts/me?email=${data?.user?.email}`}
+                      className="text-sm"
+                    >
                       Meus Posts
                     </Link>
                   </Menu.Item>

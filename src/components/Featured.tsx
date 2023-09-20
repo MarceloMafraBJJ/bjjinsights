@@ -15,10 +15,9 @@ const Featured = async () => {
 
   return (
     <div className="mt-8">
-      <h1 className="text-3xl font-normal md:text-5xl lg:text-8xl">
-        <b className="font-semibold">Hey, mmm Here!</b> Discover my stories and
-        creative ideas
-      </h1>
+      <div className="text-3xl font-medium tracking-wider md:text-5xl lg:text-8xl">
+        Desvende os segredos do <b>Jiu-Jitsu</b> e domine o <b>tatame</b>
+      </div>
 
       <div className="mt-16 flex flex-col items-start gap-10 lg:flex-row">
         <Link
@@ -44,9 +43,12 @@ const Featured = async () => {
             {removeHTMLTags(post.desc).substring(0, 150)}..
           </p>
 
-          <Button>
-            <Link href={`/posts/${post.slug}`}>Ler mais</Link>
-          </Button>
+          <Link
+            href={`/posts/${post.slug}`}
+            className="max-w-max border-b border-accent font-medium"
+          >
+            Ler mais
+          </Link>
         </div>
       </div>
     </div>
