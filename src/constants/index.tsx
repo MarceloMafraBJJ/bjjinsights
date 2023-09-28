@@ -26,6 +26,15 @@ export const removeHTMLTags = (str: string) => {
   return str.replace(/<[^>]*>/g, " ");
 };
 
+export const getVideoID = (url: string | null | undefined) => {
+  if (!url) {
+    return null;
+  }
+
+  const urlParams = new URLSearchParams(new URL(url).search);
+  return urlParams.get("v");
+};
+
 export const categories = [
   {
     slug: "ataque",
@@ -153,6 +162,29 @@ export const categories = [
         slug: "analise",
         title: "Análise",
       },
+    ],
+  },
+];
+
+export const belts = [
+  {
+    category: "Infantil",
+    subcategory: [
+      "Faixa Branca",
+      "Faixa Cinza",
+      "Faixa Amarela",
+      "Faixa Laranja",
+      "Faixa Verde",
+    ],
+  },
+  {
+    category: "Adulto",
+    subcategory: [
+      "Faixa Branca",
+      "Faixa Azul",
+      "Faixa Roxa",
+      "Faixa Marrom",
+      "Faixa Preta",
     ],
   },
 ];

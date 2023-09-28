@@ -16,23 +16,13 @@ const CategoryList = async ({ title }: CategoryListProps) => {
 
       <div className="w-full">
         <div className="scrollbar-[2px] mt-5 flex gap-x-4 overflow-x-auto p-2 scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-[#eee]">
-          {categories?.map(({ title, slug, img }, index) => {
+          {categories?.map(({ title, slug }, index) => {
             return (
               <Link
                 href={`/blog?cat=${slug}`}
-                className={`flex h-12 w-full min-w-[100px] items-center justify-center gap-3 rounded-xl bg-[#dee2e6] px-4 capitalize text-dark_primary shadow hover:opacity-90 lg:min-w-[200px]`}
+                className={`flex h-12 w-full min-w-[100px] items-center justify-center gap-3 rounded-xl bg-gray-100 px-4 capitalize text-dark_primary shadow-sm hover:opacity-90 lg:min-w-[200px]`}
                 key={index}
               >
-                {img && (
-                  <Image
-                    src={img}
-                    alt={title}
-                    width={56}
-                    height={56}
-                    className="h-8 w-8 rounded-full md:h-14 md:w-14"
-                  />
-                )}
-
                 <p className="text-center text-sm font-semibold uppercase lg:text-base">
                   {title}
                 </p>

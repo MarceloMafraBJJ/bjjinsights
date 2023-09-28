@@ -19,7 +19,7 @@ const MenuCategories = async ({ title, subtitle }: MenuCategoriesProps) => {
         {categories.map(({ title, slug }, index) => (
           <Link
             href={`/blog?cat=${slug}`}
-            className={`flex h-10 w-full items-center justify-center gap-3 rounded-xl bg-[#dee2e6] px-3 capitalize text-dark_primary`}
+            className={`flex h-10 w-full items-center justify-center gap-3 rounded-xl bg-gray-100 px-3 capitalize text-dark_primary dark:bg-gray-200`}
             key={index}
           >
             <p className="text-sm font-medium">{title}</p>

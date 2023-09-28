@@ -40,9 +40,7 @@ const CardList = async ({ page, cat, search }: CardListProps) => {
           : "Ooops, sem postagens nesta categorias."}
       </h1>
 
-      <div className="">
-        {filteredPosts?.map((post) => <Card key={post.id} {...post} />)}
-      </div>
+      {filteredPosts?.map((post) => <Card key={post.id} {...post} />)}
 
       <Pagination page={page} hasPrev={hasPrev} hasNext={hasNext} />
     </div>

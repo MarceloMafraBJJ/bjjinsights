@@ -33,6 +33,9 @@ const Navbar = () => {
           <Link className="hidden lg:block" href="/blog">
             buscar
           </Link>
+          <Link className="hidden lg:block" href="/meet">
+            conhecer
+          </Link>
         </div>
 
         <ProfileMenu />

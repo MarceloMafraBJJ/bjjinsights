@@ -73,7 +73,7 @@ const Comments = ({ postSlug }: { postSlug: string }) => {
         <div className="mt-8 flex justify-between gap-8">
           <textarea
             placeholder="Escreva um comentário..."
-            className="h-[80px] w-full resize-none rounded border-none bg-[#dee2e6] px-3 py-5 outline-none scrollbar-thin dark:bg-[#4444]"
+            className="h-[80px] w-full resize-none rounded border-none bg-[#dee2e6] px-3 py-5 outline-none scrollbar-thin dark:bg-dark_secondary"
             onChange={(e) => setDesc(e.target.value)}
             value={desc}
           />
@@ -95,7 +95,7 @@ const Comments = ({ postSlug }: { postSlug: string }) => {
           ? "Loading"
           : data?.map((item) => (
               <>
-                <div className="flex justify-between">
+                <div className="flex justify-between" key={item.id}>
                   <div className="flex gap-4" key={item.id}>
                     <div className="relative h-12 w-12">
                       <Image

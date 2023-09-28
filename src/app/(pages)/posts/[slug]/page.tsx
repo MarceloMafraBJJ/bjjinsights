@@ -1,5 +1,6 @@
 import { Comments, Menu } from "@/components";
 import LikeButton from "@/components/LikeButton";
+import PostSlider from "@/components/PostSlider";
 import { getData } from "@/constants";
 import { Post } from "@/types";
 import { getAuthSession } from "@/utils/auth";
@@ -14,20 +15,21 @@ export default async function Post({ params }: { params: { slug: string } }) {
     post: Post;
   };
 
-  console.log(post);
-
   const data = await getAuthSession();
 
   return (
     <div>
-      <div className="flex flex-col-reverse items-start gap-14 lg:flex-row lg:items-center">
+      <div className="flex flex-col-reverse items-start gap-8 lg:flex-row lg:items-center lg:gap-14">
         <div className="flex-1">
-          <h1 className="pb-12 text-xl font-semibold md:text-2xl xl:text-5xl">
+          <h1 className="pb-8 text-2xl font-semibold md:pb-12 md:text-3xl xl:text-5xl">
             {post?.title}
           </h1>
 
           <div className="flex flex-col gap-4">
-            <div className="flex gap-4">
+            <Link
+              href={`/profile?email=${post?.user?.email}`}
+              className="flex gap-4"
+            >
               {post.user.image && (
                 <div className="relative h-12 w-12">
                   <Image
@@ -39,10 +41,10 @@ export default async function Post({ params }: { params: { slug: string } }) {
                 </div>
               )}
 
-              <div className="flex flex-col items-start justify-center gap-1 text-gray-400">
+              <div className="flex flex-col items-start justify-center text-gray-400">
                 <span className="text-lg font-semibold">{post.user.name}</span>
               </div>
-            </div>
+            </Link>
 
             <div className="mt-4 flex items-start gap-x-2 text-gray-400">
               <LikeButton postId={post.id} />
@@ -65,20 +67,11 @@ export default async function Post({ params }: { params: { slug: string } }) {
           </div>
         </div>
 
-        {post.img && (
-          <div className="relative h-[400px] w-full lg:max-w-[500px] lg:flex-1">
-            <Image
-              src={post.img}
-              alt="post image"
-              fill
-              className="aspect-auto rounded-md object-cover"
-            />
-          </div>
-        )}
+        <PostSlider post={post} />
       </div>
 
       <div className="flex gap-12">
-        <div className="mt-16 flex-[2]">
+        <div className="mt-8 flex-[2] lg:mt-16">
           <div
             className="space-y-2"
             dangerouslySetInnerHTML={{ __html: post.desc }}

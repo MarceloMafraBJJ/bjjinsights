@@ -72,15 +72,18 @@ const Write = ({ categories, cat, post, type }: WriteProps) => {
       .replace(/^-+|-+$/g, "");
 
   const handleSubmit = async () => {
-    if (!title || !description) {
+    if (!title || !description || !cat) {
       return toast.error("Preencha todos os campos.");
     }
+
+    if (!media && !videoURL) {
+      return toast.error(
+        "Você precisar adicionar uma imagem ou um vídeo do youtube para criar um post.",
+      );
+    }
+
     try {
       if (type === "create") {
-        if (!cat) {
-          return toast.error("Selecione uma categoria.");
-        }
-
         await fetch("/api/posts", {
           method: "POST",
           body: JSON.stringify({
@@ -138,7 +141,6 @@ const Write = ({ categories, cat, post, type }: WriteProps) => {
 
   const handleDelete = async () => {
     try {
-      console.log(post?.img);
       post?.img && deleteObject(ref(storage, post?.img));
 
       await fetch(`/api/posts/${post?.slug}`, {
@@ -146,6 +148,7 @@ const Write = ({ categories, cat, post, type }: WriteProps) => {
       });
 
       router.push("/");
+      router.refresh();
     } catch (err) {
       console.error(err);
     }
@@ -253,7 +256,27 @@ const Write = ({ categories, cat, post, type }: WriteProps) => {
 
       {type === "edit" && (
         <button
-          onClick={handleDelete}
+          onClick={() =>
+            toast((t) => (
+              <div className="flex flex-col">
+                <p>Tem certeza que deseja excluir este post?</p>
+                <div className="mt-2 flex items-center justify-center gap-2">
+                  <button
+                    className="flex-1 rounded-lg bg-accent p-2 font-semibold text-white"
+                    onClick={() => handleDelete()}
+                  >
+                    Excluir
+                  </button>
+                  <button
+                    className="flex-1 rounded-lg bg-emerald-500 p-2 font-semibold text-white"
+                    onClick={() => toast.dismiss(t.id)}
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            ))
+          }
           className="absolute bottom-20 mx-auto rounded-3xl border-none bg-accent px-5 py-2 font-semibold text-white"
         >
           Excluir Postagem

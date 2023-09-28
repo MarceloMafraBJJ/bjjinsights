@@ -4,6 +4,7 @@ import CategoryList from "./CategoryList";
 import Comments from "./Comments";
 import Featured from "./Featured";
 import Footer from "./Footer";
+import FormField from "./FormField";
 import Menu from "./Menu";
 import MenuCard from "./MenuCard";
 import MenuCategories from "./MenuCategories";
@@ -22,6 +23,7 @@ export {
   Comments,
   Featured,
   Footer,
+  FormField,
   Menu,
   MenuCard,
   MenuCategories,

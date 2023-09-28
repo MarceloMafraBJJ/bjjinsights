@@ -45,7 +45,7 @@ const Footer = () => {
           </Link>
         </div>
 
-        <div className="flex w-full flex-1 justify-end gap-x-10 lg:gap-x-20">
+        <div className="flex w-full flex-1 justify-around gap-x-10 lg:justify-end lg:gap-x-20">
           <div className="flex flex-col gap-2">
             <span className="font-semibold">Links</span>
 

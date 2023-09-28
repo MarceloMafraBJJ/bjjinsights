@@ -86,10 +86,19 @@ const ProfileMenu = () => {
 
                   <Menu.Item>
                     <Link
-                      href={`/posts/me?email=${data?.user?.email}`}
+                      href={`/profile?email=${data?.user?.email}`}
                       className="text-sm"
                     >
-                      Meus Posts
+                      Perfil
+                    </Link>
+                  </Menu.Item>
+
+                  <Menu.Item>
+                    <Link
+                      href={`/profile/edit?email=${data?.user?.email}`}
+                      className="text-sm"
+                    >
+                      Editar Perfil
                     </Link>
                   </Menu.Item>
                 </div>

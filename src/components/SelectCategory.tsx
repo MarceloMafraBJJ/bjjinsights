@@ -59,7 +59,7 @@ const SelectCategory = ({ categories, cat }: SelectCategoryProps) => {
       {({ open }) => (
         <>
           <div className="relative flex w-[100%] justify-start md:w-[280px]">
-            <Listbox.Button className="relative h-[40px] w-[100%] cursor-pointer rounded-md bg-gray-100 text-left shadow-sm dark:bg-[#4444] md:w-[280px]">
+            <Listbox.Button className="relative h-[40px] w-[100%] cursor-pointer rounded-md bg-gray-100 text-left shadow-sm dark:bg-dark_secondary md:w-[280px]">
               <span className="ml-3 text-sm">
                 {cat || "Selecione uma categoria"}
               </span>
@@ -129,8 +129,10 @@ const CategoryOption = ({
         {selected ? (
           <span
             className={classNames(
-              active ? "text-green-600" : "text-green-600",
-              "absolute inset-y-0 left-0 flex items-center pl-3",
+              active
+                ? "text-dark_secondary dark:text-light_primary"
+                : "text-dark_secondary dark:text-light_primary",
+              "absolute inset-y-0 right-0 flex items-center pl-3",
             )}
           >
             <CheckIcon className="h-5 w-5" aria-hidden="true" />

@@ -20,7 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={`${inter.className} scrollbar-thin scrollbar-track-white scrollbar-thumb-gray-300 dark:scrollbar-track-dark_primary dark:scrollbar-thumb-dark_secondary`}
+      >
         <AuthProvider>
           <Toaster />
 

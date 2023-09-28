@@ -10,6 +10,7 @@ export const GET = async (req: NextRequest) => {
       where: {
         NOT: {
           img: "",
+          videoURL: "",
         },
       },
     });

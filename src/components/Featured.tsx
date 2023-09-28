@@ -1,8 +1,7 @@
-import { getData, removeHTMLTags } from "@/constants";
+import { getData, getVideoID, removeHTMLTags } from "@/constants";
 import { Post } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-import Button from "./Button";
 
 const Featured = async () => {
   const { post } = (await getData(`posts/featured`)) as {
@@ -13,19 +12,24 @@ const Featured = async () => {
     return null;
   }
 
+  const videoID = getVideoID(post.videoURL);
+
   return (
     <div className="mt-8">
       <div className="text-3xl font-medium tracking-wider md:text-5xl lg:text-8xl">
         Desvende os segredos do <b>Jiu-Jitsu</b> e domine o <b>tatame</b>
       </div>
 
-      <div className="mt-16 flex flex-col items-start gap-10 lg:flex-row">
+      <div className="mt-10 flex flex-col items-start gap-10 rounded-md lg:flex-row">
         <Link
           href={`/posts/${post.slug}`}
           className="relative h-[200px] w-full md:h-[350px] md:w-[500px]"
         >
           <Image
-            src={post.img!}
+            src={
+              post.img ||
+              `https://img.youtube.com/vi/${videoID}/maxresdefault.jpg`
+            }
             alt="Post Image"
             fill
             className="aspect-auto rounded-md"

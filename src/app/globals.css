@@ -33,3 +33,11 @@ b {
 .scrollbar-thin::-webkit-scrollbar {
   @apply h-1;
 }
+
+.swiper-pagination-bullet {
+  @apply !h-3 !w-3 !bg-dark_primary dark:!bg-white;
+}
+
+.swiper-pagination-bullet-active {
+  @apply !h-3 !w-3 !bg-dark_primary dark:!bg-white;
+}

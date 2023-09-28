@@ -35,7 +35,7 @@ const Search = ({ placeholder }: SearchProps) => {
   };
 
   return (
-    <div className="flex h-[40px] w-full items-center rounded-lg bg-[#EDEDED] p-2 dark:bg-[#4444] md:w-[300px]">
+    <div className="flex h-[40px] w-full items-center rounded-lg bg-gray-100 p-2 dark:bg-dark_secondary md:w-[300px]">
       <MagnifyingGlassIcon className="mx-2 h-4 w-6" />
 
       <input
