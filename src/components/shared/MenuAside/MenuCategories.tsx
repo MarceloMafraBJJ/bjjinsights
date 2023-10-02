@@ -9,7 +9,6 @@ interface MenuCategoriesProps {
 
 const MenuCategories = async ({ title, subtitle }: MenuCategoriesProps) => {
   const categories = (await getData("categories")) as Category[];
-
   if (categories.length <= 0) return;
 
   return (

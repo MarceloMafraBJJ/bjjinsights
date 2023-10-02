@@ -17,6 +17,8 @@ export default async function Post({ params }: { params: { slug: string } }) {
     post: Post;
   };
 
+  console.log(post);
+
   const data = await getAuthSession();
 
   return (
@@ -32,10 +34,10 @@ export default async function Post({ params }: { params: { slug: string } }) {
               href={`/profile?email=${post?.user?.email}`}
               className="flex gap-4"
             >
-              {post.user.image && (
+              {post?.user.image && (
                 <div className="relative h-12 w-12">
                   <Image
-                    src={post.user.image}
+                    src={post?.user.image}
                     alt="user avatar"
                     fill
                     className="rounded-full object-cover"
@@ -44,23 +46,23 @@ export default async function Post({ params }: { params: { slug: string } }) {
               )}
 
               <div className="flex flex-col items-start justify-center text-zinc-400">
-                <span className="text-lg font-semibold">{post.user.name}</span>
+                <span className="text-lg font-semibold">{post?.user.name}</span>
               </div>
             </Link>
 
             <div className="mt-4 flex items-center gap-x-2 text-zinc-400">
-              <LikeButton postId={post.id} />
+              <LikeButton postId={post?.id} />
 
               <span className="text-lg font-semibold">
-                {post.likesCount || "0"} Likes
+                {post?.likesCount || "0"} Likes
               </span>
 
-              <span className="text-lg font-semibold">{post.views} Views</span>
+              <span className="text-lg font-semibold">{post?.views} Views</span>
 
               <ReportButton userEmail={data?.user?.email!} post={post} />
             </div>
 
-            {data?.user?.email == post.userEmail && (
+            {data?.user?.email == post?.userEmail && (
               <Link href={`/posts/edit/${post.slug}`}>
                 <Button className="flex gap-4">
                   <PencilIcon className="h-6 w-6" /> Editar Postagem
@@ -70,18 +72,18 @@ export default async function Post({ params }: { params: { slug: string } }) {
           </div>
         </div>
 
-        <PostSlider post={post} />
+        <PostSlider post={post || null} />
       </div>
 
       <div className="flex gap-12">
         <div className="mt-8 flex-[2] lg:mt-16">
           <div
             className="space-y-2"
-            dangerouslySetInnerHTML={{ __html: post.desc }}
+            dangerouslySetInnerHTML={{ __html: post?.desc }}
           />
 
           <div>
-            <Comments postSlug={post.slug} />
+            <Comments postSlug={post?.slug} />
           </div>
         </div>
         <MenuAside />

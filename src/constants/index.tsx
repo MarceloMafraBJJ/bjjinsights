@@ -1,7 +1,5 @@
 export const getData = async (url: string) => {
-  const res = await fetch(`http://localhost:3000/api/${url}`, {
-    cache: "no-store",
-  });
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/${url}`);
 
   if (!res.ok) {
     throw new Error("Failed");

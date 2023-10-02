@@ -35,12 +35,14 @@ const Write = ({ categories, cat, post, type }: WriteProps) => {
   const [title, setTitle] = useState(post?.title || "");
   const [videoURL, setVideoURL] = useState(post?.videoURL || "");
   const [description, setDescription] = useState(post?.desc || "");
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
   const storage = getStorage(app);
 
   useEffect(() => {
     const upload = () => {
+      setIsLoading(true);
       const name = new Date().getTime() + file?.name!;
       const storageRef = ref(storage, name);
       const uploadTask = uploadBytesResumable(storageRef, file!);
@@ -52,6 +54,7 @@ const Write = ({ categories, cat, post, type }: WriteProps) => {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setMedia(downloadURL);
+            setIsLoading(false);
             toast.success("Imagem enviada com sucesso.");
           });
         },
@@ -197,6 +200,7 @@ const Write = ({ categories, cat, post, type }: WriteProps) => {
       <Button
         onClick={handleSubmit}
         className="absolute right-5 top-8 rounded-3xl bg-emerald-500"
+        disabled={isLoading}
       >
         {type == "create" ? "Publicar" : "Editar"}
       </Button>

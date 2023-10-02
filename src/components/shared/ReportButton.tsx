@@ -65,7 +65,7 @@ const ReportButton = ({
             <div className="flex flex-col">
               <p>Selecione um motivo de relatório:</p>
               <select
-                className="mt-2 rounded-md border border-gray-300 p-1"
+                className="mt-2 bg-transparent rounded-md border border-gray-300 p-1"
                 onChange={(e) => setSelectedReason(e.target.value)}
                 value={selectedReason || ""}
               >
