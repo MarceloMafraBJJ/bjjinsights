@@ -1,12 +1,12 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Footer, Navbar } from "@/components";
+import { Raleway } from "next/font/google";
+import { Footer, Navbar, BottomBar } from "@/components/shared";
 import { ThemeProvider } from "@/context/ThemeContext";
 import AuthProvider from "@/utils/AuthProvider";
 import { Toaster } from "react-hot-toast";
 
-const inter = Inter({ subsets: ["latin"] });
+const raleway = Raleway({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "BJJInsights | Revolução Digital",
@@ -21,17 +21,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} scrollbar-thin scrollbar-track-white scrollbar-thumb-gray-300 dark:scrollbar-track-dark_primary dark:scrollbar-thumb-dark_secondary`}
+        className={`${raleway.className} dark:scrollbar-track-dark_primary dark:scrollbar-thumb-dark_secondary scrollbar-thin scrollbar-track-white scrollbar-thumb-gray-300`}
       >
         <AuthProvider>
           <Toaster />
 
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="min-h-screen bg-white text-black dark:bg-[#0f172a] dark:text-[#ddd]">
+            <div className="min-h-screen bg-primary text-default_text">
               <div className="mx-auto px-10 md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1536px] xl:px-20">
                 <Navbar />
                 {children}
                 <Footer />
+                <BottomBar />
               </div>
             </div>
           </ThemeProvider>

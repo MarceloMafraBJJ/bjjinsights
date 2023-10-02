@@ -1,12 +1,14 @@
-import { Comments, Menu } from "@/components";
-import LikeButton from "@/components/LikeButton";
-import PostSlider from "@/components/PostSlider";
-import { getData } from "@/constants";
-import { Post } from "@/types";
-import { getAuthSession } from "@/utils/auth";
-import { PencilIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
+import { PencilIcon } from "@heroicons/react/24/solid";
+
+import { getAuthSession } from "@/utils/auth";
+import { getData } from "@/constants";
+import { Post } from "@/types";
+
+import { LikeButton, PostSlider, Comments } from "@/components/posts";
+import { MenuAside } from "@/components/shared/MenuAside";
+import { Button, ReportButton } from "@/components/shared";
 
 export default async function Post({ params }: { params: { slug: string } }) {
   const { slug } = params;
@@ -18,7 +20,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
   const data = await getAuthSession();
 
   return (
-    <div>
+    <main>
       <div className="flex flex-col-reverse items-start gap-8 lg:flex-row lg:items-center lg:gap-14">
         <div className="flex-1">
           <h1 className="pb-8 text-2xl font-semibold md:pb-12 md:text-3xl xl:text-5xl">
@@ -41,12 +43,12 @@ export default async function Post({ params }: { params: { slug: string } }) {
                 </div>
               )}
 
-              <div className="flex flex-col items-start justify-center text-gray-400">
+              <div className="flex flex-col items-start justify-center text-zinc-400">
                 <span className="text-lg font-semibold">{post.user.name}</span>
               </div>
             </Link>
 
-            <div className="mt-4 flex items-start gap-x-2 text-gray-400">
+            <div className="mt-4 flex items-center gap-x-2 text-zinc-400">
               <LikeButton postId={post.id} />
 
               <span className="text-lg font-semibold">
@@ -54,14 +56,15 @@ export default async function Post({ params }: { params: { slug: string } }) {
               </span>
 
               <span className="text-lg font-semibold">{post.views} Views</span>
+
+              <ReportButton userEmail={data?.user?.email!} post={post} />
             </div>
 
             {data?.user?.email == post.userEmail && (
-              <Link
-                href={`/posts/edit/${post.slug}`}
-                className="flex max-w-max gap-2 rounded-md bg-accent_secondary px-4 py-2"
-              >
-                <PencilIcon className="h-6 w-6" /> Editar Postagem
+              <Link href={`/posts/edit/${post.slug}`}>
+                <Button className="flex gap-4">
+                  <PencilIcon className="h-6 w-6" /> Editar Postagem
+                </Button>
               </Link>
             )}
           </div>
@@ -81,8 +84,8 @@ export default async function Post({ params }: { params: { slug: string } }) {
             <Comments postSlug={post.slug} />
           </div>
         </div>
-        <Menu />
+        <MenuAside />
       </div>
-    </div>
+    </main>
   );
 }

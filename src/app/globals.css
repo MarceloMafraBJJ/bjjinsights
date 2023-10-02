@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --primary: #fff;
+    --secondary: #f6f6f6;
+    --text: #000;
+  }
+
+  .dark {
+    --primary: #0f172a;
+    --secondary: #3344;
+    --text: #eee;
+  }
+}
+
 body {
   @apply max-w-[100vw] overflow-x-hidden;
 }
@@ -35,9 +49,24 @@ b {
 }
 
 .swiper-pagination-bullet {
-  @apply !h-3 !w-3 !bg-dark_primary dark:!bg-white;
+  @apply !h-3 !w-3 !bg-primary;
 }
 
 .swiper-pagination-bullet-active {
-  @apply !h-3 !w-3 !bg-dark_primary dark:!bg-white;
+  @apply !h-3 !w-3 !bg-primary;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  @apply !text-default_text;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  @apply rounded-md px-4 py-8 transition-all hover:bg-black/30;
+}
+
+.swiper-button-next.swiper-button-disabled,
+.swiper-button-prev.swiper-button-disabled {
+  @apply !cursor-not-allowed !opacity-50;
 }

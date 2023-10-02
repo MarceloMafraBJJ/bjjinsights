@@ -1,4 +1,4 @@
-import ProfilePage from "@/components/ProfilePage";
+import { ProfilePage } from "@/components/profile";
 import { getData } from "@/constants";
 import { User } from "@/types";
 import { getAuthSession } from "@/utils/auth";

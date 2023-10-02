@@ -1,4 +1,4 @@
-import Write from "@/components/Write";
+import { Write } from "@/components/profile";
 import { getData } from "@/constants";
 import { Category, Post } from "@/types";
 import { getAuthSession } from "@/utils/auth";

@@ -1,6 +1,6 @@
-import { CardList, Menu } from "@/components";
-import { Search, SelectCategory } from "@/components";
-import ClearParamsButton from "@/components/ClearParamsButton";
+import { PostCardList } from "@/components/posts";
+import { Search, SelectCategory, ClearParamsButton } from "@/components/shared";
+import { MenuAside } from "@/components/shared/MenuAside";
 
 import { getData } from "@/constants";
 import { Category } from "@/types";
@@ -37,8 +37,12 @@ export default async function Blog({ searchParams }: BlogProps) {
       </div>
 
       <div className="flex gap-14">
-        <CardList page={page} cat={cat} search={search?.toLocaleLowerCase()} />
-        <Menu />
+        <PostCardList
+          page={page}
+          cat={cat}
+          search={search?.toLocaleLowerCase()}
+        />
+        <MenuAside />
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
-import Write from "@/components/Write";
 import { getData } from "@/constants";
 import { Category } from "@/types";
 import { getAuthSession } from "@/utils/auth";
 import { redirect } from "next/navigation";
+import { Write } from "@/components/profile";
 
 interface BlogProps {
   searchParams: {

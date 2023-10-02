@@ -10,6 +10,7 @@ type User = {
   followingIds?: string[] | null;
   followersIds?: string[] | null;
   belt?: string | null;
+  createdAt: string;
 
   posts: Post[];
   comments: Comment[];

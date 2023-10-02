@@ -188,3 +188,12 @@ export const belts = [
     ],
   },
 ];
+
+export const commonReports = [
+  "Conteúdo ofensivo",
+  "Spam",
+  "Plágio",
+  "Violação de direitos autorais",
+  "Assédio",
+  "Outro",
+];

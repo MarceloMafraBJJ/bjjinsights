@@ -1,4 +1,6 @@
-import { CardList, CategoryList, Featured, Menu } from "../components";
+import { CategoryList, Featured } from "../components/shared";
+import { MenuAside } from "../components/shared/MenuAside";
+import { PostCardList } from "../components/posts";
 
 interface HomeProps {
   searchParams: {
@@ -15,8 +17,8 @@ export default function Home({ searchParams }: HomeProps) {
       <CategoryList title="Popular Categories" />
 
       <div className="flex gap-14">
-        <CardList page={page} />
-        <Menu />
+        <PostCardList page={page} />
+        <MenuAside />
       </div>
     </div>
   );

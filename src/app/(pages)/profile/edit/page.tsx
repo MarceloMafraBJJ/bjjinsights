@@ -1,4 +1,4 @@
-import ProfileForm from "@/components/ProfileForm";
+import { ProfileForm } from "@/components/profile";
 import { getData } from "@/constants";
 import { User } from "@/types";
 import { getAuthSession } from "@/utils/auth";
