@@ -17,7 +17,6 @@ const Pagination = ({ page, hasPrev, hasNext }: PaginationProps) => {
       <Button
         onClick={() => router.push(`?page=${page - 1}`)}
         disabled={!hasPrev}
-        accentColor="bg-accent disabled:bg-accent/50 hover:bg-accent/90"
       >
         Anterior
       </Button>
@@ -25,7 +24,6 @@ const Pagination = ({ page, hasPrev, hasNext }: PaginationProps) => {
       <Button
         onClick={() => router.push(`?page=${page + 1}`)}
         disabled={!hasNext}
-        accentColor="bg-accent disabled:bg-accent/50 hover:bg-accent/90"
       >
         Próximo
       </Button>
