@@ -14,10 +14,6 @@ const ReportButton = ({
   userEmail: string;
   post: Post;
 }) => {
-  if (!userEmail) {
-    return toast.error("Você precisa estar logado para reportar uma postagem");
-  }
-
   const [selectedReason, setSelectedReason] = useState<string | null>(null);
   const [hasReported, setHasReported] = useState(false);
 
@@ -26,6 +22,12 @@ const ReportButton = ({
   }, [selectedReason]);
 
   const handleReport = async () => {
+    if (!userEmail) {
+      return toast.error(
+        "Você precisa estar logado para reportar uma postagem",
+      );
+    }
+
     if (!selectedReason) {
       return toast.error("Por favor, selecione um motivo de relatório.");
     }
