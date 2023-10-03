@@ -1,7 +1,6 @@
 import { ClearParamsButton, Search } from "@/components/shared";
 import { MeetHorizontalSlider } from "@/components/meet";
 import { getData } from "@/constants";
-import { User } from "@/types";
 import { getAuthSession } from "@/utils/auth";
 import Link from "next/link";
 
@@ -11,14 +10,17 @@ interface ProfileProps {
   };
 }
 
-export default async function Blog({ searchParams }: ProfileProps) {
+export default async function Meet({ searchParams }: ProfileProps) {
   const session = await getAuthSession();
 
   const { search } = searchParams;
 
   const { nearCurrentUser } = await getData(
-    `user/meet/nearCurrentUser?email=${session?.user?.email}&page=1`,
+    `user/meet/nearCurrentUser?email=${
+      session?.user?.email || "unauthenticated"
+    }&page=1`,
   );
+
   const { allUsers, findUserSearch } = await getData(
     `user/meet/allUsers?search=${search}&page=1`,
   );

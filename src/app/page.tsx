@@ -1,7 +1,6 @@
 import { CategoryList, Featured } from "../components/shared";
 import { MenuAside } from "../components/shared/MenuAside";
 import { PostCardList } from "../components/posts";
-import { getData } from "@/constants";
 
 interface HomeProps {
   searchParams: {
@@ -11,7 +10,7 @@ interface HomeProps {
 
 export default async function Home({ searchParams }: HomeProps) {
   const page = parseInt(searchParams.page) || 1;
-  
+
   return (
     <div>
       <Featured />

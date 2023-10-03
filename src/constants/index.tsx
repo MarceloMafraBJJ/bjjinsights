@@ -1,23 +1,23 @@
 export const getData = async (url: string) => {
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/${url}`);
+  try {
+    const res = await fetch(`https://bjjinsights.vercel.app/api/${url}`, {
+      cache: "no-store",
+    });
 
-  if (!res.ok) {
+    return await res.json();
+  } catch (error) {
     throw new Error("Failed");
   }
-
-  return res.json();
 };
 
 export const fetcher = async (url: string) => {
-  const res = await fetch(url);
+  try {
+    const res = await fetch(url);
 
-  const data = await res.json();
-
-  if (!res.ok) {
-    throw new Error(data.message);
+    return await res.json();
+  } catch (error) {
+    throw new Error("Failed");
   }
-
-  return data;
 };
 
 export const removeHTMLTags = (str: string) => {

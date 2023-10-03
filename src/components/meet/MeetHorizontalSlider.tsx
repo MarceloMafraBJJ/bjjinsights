@@ -11,6 +11,9 @@ import { User } from "@/types";
 import { MeetCard } from ".";
 
 const MeetHorizontalSlider = ({ users }: { users: User[] }) => {
+  const slidesPerView =
+    typeof window !== "undefined" && window?.innerWidth < 1024 ? 1 : 3;
+
   return (
     <Swiper
       effect={"coverflow"}
@@ -22,7 +25,7 @@ const MeetHorizontalSlider = ({ users }: { users: User[] }) => {
         slideShadows: false,
       }}
       initialSlide={1}
-      slidesPerView={3}
+      slidesPerView={slidesPerView}
       grabCursor={true}
       centeredSlides={true}
       pagination={{ clickable: true }}

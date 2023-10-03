@@ -7,8 +7,6 @@ export const GET = async () => {
       include: { subcategories: true },
     });
 
-    console.log(categories + "API");
-
     return NextResponse.json(categories, {
       status: 200,
     });

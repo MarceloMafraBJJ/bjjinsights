@@ -9,7 +9,7 @@ interface CategoryListProps {
 const CategoryList = async ({ title }: CategoryListProps) => {
   const categories = (await getData("categories")) as Category[];
   if (categories.length <= 0) return;
-  
+
   return (
     <div className="my-12">
       <h1 className="text-2xl font-semibold">{title}</h1>

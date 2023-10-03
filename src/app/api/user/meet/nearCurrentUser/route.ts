@@ -9,7 +9,7 @@ export const GET = async (req: NextRequest) => {
   const POST_PER_PAGE = 8;
 
   try {
-    if (email) {
+    if (email && email !== "unauthenticated") {
       const currentUser = await prisma.user.findUnique({
         where: { email },
         include: { location: true },
@@ -59,6 +59,11 @@ export const GET = async (req: NextRequest) => {
         );
       }
     }
+
+    return NextResponse.json({
+      message: "User unauthenticated",
+      status: 500,
+    });
   } catch (err) {
     console.error(err);
 

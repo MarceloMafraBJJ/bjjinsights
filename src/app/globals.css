@@ -49,21 +49,21 @@ b {
 }
 
 .swiper-pagination-bullet {
-  @apply !h-3 !w-3 !bg-primary;
+  @apply !h-3 !w-3 !bg-white;
 }
 
 .swiper-pagination-bullet-active {
-  @apply !h-3 !w-3 !bg-primary;
+  @apply !h-3 !w-3 !bg-white;
 }
 
 .swiper-button-next,
 .swiper-button-prev {
-  @apply !text-default_text;
+  @apply !text-white;
 }
 
 .swiper-button-next:after,
 .swiper-button-prev:after {
-  @apply rounded-md px-4 py-8 transition-all hover:bg-black/30;
+  @apply !z-50 rounded-md px-4 py-8 transition-all hover:bg-black/30;
 }
 
 .swiper-button-next.swiper-button-disabled,

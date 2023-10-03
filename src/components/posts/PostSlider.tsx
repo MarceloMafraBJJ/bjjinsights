@@ -3,11 +3,12 @@
 import React from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Pagination, Navigation } from "swiper/modules";
 import { Post } from "@/types";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 const PostSlider = ({ post }: { post: Post }) => {
   const getYouTubeVideoID = (link: string) => {
@@ -36,7 +37,7 @@ const PostSlider = ({ post }: { post: Post }) => {
       navigation
       pagination={{ clickable: true }}
       className="h-[300px] w-full rounded-lg lg:h-[400px] lg:w-[650px]"
-      modules={[Pagination]}
+      modules={[Pagination, Navigation]}
     >
       {post.img && (
         <SwiperSlide key="image">

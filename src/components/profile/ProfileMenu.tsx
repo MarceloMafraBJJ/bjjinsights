@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
@@ -14,8 +14,27 @@ const ProfileMenu = () => {
   const { data, status } = useSession();
   const [openModal, setOpenModal] = useState(false);
   const pathname = usePathname();
+  const modalRef = useRef<HTMLDivElement | null>(null);
 
   if (pathname.includes("write") || pathname.includes("posts/edit")) return;
+
+  useEffect(() => {
+    const closeOnOutsideClick = (e: MouseEvent) => {
+      if (
+        openModal &&
+        modalRef.current &&
+        !modalRef.current.contains(e.target as Node)
+      ) {
+        setOpenModal(false);
+      }
+    };
+
+    document.addEventListener("click", closeOnOutsideClick);
+
+    return () => {
+      document.removeEventListener("click", closeOnOutsideClick);
+    };
+  }, [openModal]);
 
   return (
     <div className="relative z-10 flex flex-col items-center">
@@ -54,6 +73,7 @@ const ProfileMenu = () => {
             static
             className="absolute right-28 mt-3 flex min-w-max translate-x-1/2 flex-col items-center justify-center rounded-xl border border-secondary bg-primary p-7 sm:min-w-[300px] lg:right-1/2"
             onMouseLeave={() => setOpenModal(false)}
+            ref={modalRef}
           >
             <div className="flex flex-col items-center gap-y-4">
               {data?.user?.image && (

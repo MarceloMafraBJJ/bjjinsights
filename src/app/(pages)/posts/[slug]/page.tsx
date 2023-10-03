@@ -17,8 +17,6 @@ export default async function Post({ params }: { params: { slug: string } }) {
     post: Post;
   };
 
-  console.log(post);
-
   const data = await getAuthSession();
 
   return (
