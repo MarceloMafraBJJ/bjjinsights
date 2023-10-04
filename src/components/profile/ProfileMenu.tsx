@@ -16,8 +16,6 @@ const ProfileMenu = () => {
   const pathname = usePathname();
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  if (pathname.includes("write") || pathname.includes("posts/edit")) return;
-
   useEffect(() => {
     const closeOnOutsideClick = (e: MouseEvent) => {
       if (
@@ -35,6 +33,9 @@ const ProfileMenu = () => {
       document.removeEventListener("click", closeOnOutsideClick);
     };
   }, [openModal]);
+
+  if (pathname.includes("write") || pathname.includes("posts/edit"))
+    return null;
 
   return (
     <div className="relative z-10 flex flex-col items-center">

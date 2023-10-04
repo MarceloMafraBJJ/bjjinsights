@@ -26,6 +26,7 @@ const MeetHorizontalSlider = ({ users }: { users: User[] }) => {
       }}
       initialSlide={1}
       slidesPerView={slidesPerView}
+      spaceBetween={10}
       grabCursor={true}
       centeredSlides={true}
       pagination={{ clickable: true }}

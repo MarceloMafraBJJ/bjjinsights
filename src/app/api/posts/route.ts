@@ -8,9 +8,71 @@ export const GET = async (req: NextRequest) => {
 
   const page = searchParams.get("page");
   const cat = searchParams.get("cat");
-  const POST_PER_PAGE = 4;
+  const search = searchParams.get("search");
+  const POST_PER_PAGE = 8;
 
   const isCategory = categories.filter(({ title }) => title == cat);
+
+  let searchWhere = {};
+  let catWhere = {};
+
+  if (search !== null && search !== "undefined") {
+    searchWhere = {
+      OR: [
+        {
+          title: {
+            contains: search,
+            mode: "insensitive",
+          },
+        },
+        {
+          desc: {
+            contains: search,
+            mode: "insensitive",
+          },
+        },
+      ],
+    };
+  }
+
+  if (cat !== null && cat !== "undefined") {
+    if (isCategory.length > 0) {
+      let subcategories = isCategory.map(({ subcategories }) => {
+        return subcategories.map(({ title }) => title);
+      });
+
+      let filteredCategories = subcategories[0];
+      filteredCategories.push(cat);
+
+      catWhere = {
+        OR: filteredCategories.map((subcategory) => ({
+          catSlug: {
+            contains: subcategory,
+            mode: "insensitive",
+          },
+        })),
+      };
+    } else {
+      catWhere = {
+        catSlug: {
+          equals: cat,
+          mode: "insensitive",
+        },
+      };
+    }
+  }
+
+  let where = {};
+
+  if (Object.keys(searchWhere).length > 0 && Object.keys(catWhere).length > 0) {
+    where = {
+      AND: [searchWhere, catWhere],
+    };
+  } else if (Object.keys(searchWhere).length > 0) {
+    where = searchWhere;
+  } else if (Object.keys(catWhere).length > 0) {
+    where = catWhere;
+  }
 
   try {
     const [posts, count] = await prisma.$transaction([
@@ -20,29 +82,13 @@ export const GET = async (req: NextRequest) => {
         orderBy: {
           createdAt: "desc",
         },
+        where,
       }),
-      prisma.post.count({ where: { ...(cat && { catSlug: cat }) } }),
+      prisma.post.count({ where }),
     ]);
 
-    let result;
-    if (!cat) {
-      result = posts;
-    } else if (isCategory.length > 0) {
-      let subcategories = isCategory.map(({ subcategories }) => {
-        return subcategories.map(({ title }) => title);
-      });
-
-      result = posts.filter(({ catSlug }) => {
-        return subcategories[0].includes(catSlug);
-      });
-    } else {
-      result = posts.filter(({ catSlug }) => {
-        return cat == catSlug;
-      });
-    }
-
     return NextResponse.json(
-      { posts: result, count },
+      { posts, count },
       {
         status: 200,
       },
@@ -69,8 +115,6 @@ export const POST = async (req: NextRequest) => {
 
   try {
     const body = await req.json();
-
-    console.log(body);
 
     const post = await prisma.post.create({
       data: { ...body, userEmail: session.user?.email!, likesCount: 0 },

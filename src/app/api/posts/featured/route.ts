@@ -7,12 +7,6 @@ export const GET = async (req: NextRequest) => {
       orderBy: {
         createdAt: "desc",
       },
-      where: {
-        NOT: {
-          img: "",
-          videoURL: "",
-        },
-      },
     });
 
     return NextResponse.json(

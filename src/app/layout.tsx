@@ -24,7 +24,7 @@ export default function RootLayout({
         className={`${raleway.className} dark:scrollbar-track-dark_primary dark:scrollbar-thumb-dark_secondary scrollbar-thin scrollbar-track-white scrollbar-thumb-gray-300`}
       >
         <AuthProvider>
-          <Toaster />
+          <Toaster toastOptions={{ duration: 3000 }} />
 
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="min-h-screen bg-primary text-default_text">

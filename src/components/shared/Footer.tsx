@@ -51,12 +51,11 @@ const Footer = () => {
 
             <Link href="/">Home</Link>
             <Link href="/blog">Buscar</Link>
+            <Link href="/blog">Conhecer</Link>
           </div>
 
           <div className="flex flex-col gap-2">
             <span className="font-semibold">Social</span>
-
-            <Link href="/">X</Link>
             <Link href="/">Threads</Link>
           </div>
 
