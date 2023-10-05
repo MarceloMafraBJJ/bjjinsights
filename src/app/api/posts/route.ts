@@ -35,7 +35,7 @@ export const GET = async (req: NextRequest) => {
     };
   }
 
-  if (cat !== null && cat !== "undefined") {
+  if (cat !== null && cat !== "undefined" && cat !== "") {
     if (isCategory.length > 0) {
       let subcategories = isCategory.map(({ subcategories }) => {
         return subcategories.map(({ title }) => title);

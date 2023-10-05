@@ -1,8 +1,8 @@
 const isProduction = process.env.NODE_ENV === "production";
 
-const apiUrl = isProduction
+export const apiUrl = isProduction
   ? process.env.NEXT_PUBLIC_API_URL || ""
-  : "http://127.0.0.1:3000";
+  : "http://localhost:3000";
 
 export const getData = async (url: string) => {
   try {

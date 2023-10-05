@@ -72,7 +72,7 @@ const ProfileMenu = () => {
         >
           <Menu.Items
             static
-            className="absolute right-28 mt-3 flex min-w-max translate-x-1/2 flex-col items-center justify-center rounded-xl border border-secondary bg-primary p-7 sm:min-w-[300px] lg:right-1/2"
+            className="absolute right-[120px] mt-3 flex w-[250px] translate-x-1/2 flex-col items-center justify-center rounded-xl border border-secondary bg-primary p-7 md:right-28 lg:right-1/2"
             onMouseLeave={() => setOpenModal(false)}
             ref={modalRef}
           >

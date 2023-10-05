@@ -1,4 +1,3 @@
-import { Comment } from "@/types";
 import { getAuthSession } from "@/utils/auth";
 import prisma from "@/utils/connect";
 import { NextRequest, NextResponse } from "next/server";
@@ -7,18 +6,28 @@ export const GET = async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
 
   const postSlug = searchParams.get("postSlug");
+  const page = searchParams.get("page");
+  const COMMENT_PER_PAGE = 10;
 
   try {
-    const comments = await prisma.comment.findMany({
-      where: { ...(postSlug && { postSlug }) },
-      include: {
-        user: true,
-      },
-    });
+    const [comments, count] = await prisma.$transaction([
+      prisma.comment.findMany({
+        take: COMMENT_PER_PAGE,
+        skip: COMMENT_PER_PAGE * (parseInt(page!) - 1),
+        where: { ...(postSlug && { postSlug }) },
+        include: {
+          user: true,
+        },
+      }),
+      prisma.comment.count({ where: { ...(postSlug && { postSlug }) } }),
+    ]);
 
-    return NextResponse.json(comments, {
-      status: 200,
-    });
+    return NextResponse.json(
+      { comments, count },
+      {
+        status: 200,
+      },
+    );
   } catch (err) {
     console.error(err);
 

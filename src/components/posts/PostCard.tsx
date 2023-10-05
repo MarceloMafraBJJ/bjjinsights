@@ -15,7 +15,7 @@ const PostCard = ({
   const videoID = getVideoID(videoURL);
 
   return (
-    <div className="mb-14 flex flex-col items-center gap-5 rounded-lg p-5 opacity-90 shadow transition-all hover:opacity-100 dark:shadow-2xl lg:flex-row lg:gap-14">
+    <div className="mb-6 flex flex-col items-start gap-5 rounded-lg p-5 opacity-90 shadow transition-all hover:opacity-100 dark:shadow-2xl md:mb-10 lg:flex-row lg:gap-14">
       <Link
         href={`/posts/${slug}`}
         className="relative h-[200px] w-full lg:h-full lg:min-h-[300px] lg:w-[300px]"

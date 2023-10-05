@@ -27,11 +27,13 @@ export default async function Meet({ searchParams }: ProfileProps) {
   const { popularUsers } = await getData(`user/meet/popularUsers?page=1`);
 
   return (
-    <main className="mt-12 space-y-6">
-      <h2>
-        <strong>{session?.user?.name && session.user.name + ", "}</strong>
+    <main className="mt-2 space-y-6 md:mt-8">
+      <h1 className="text-lg">
+        <strong className="text-xl">
+          {session?.user?.name && session.user.name + ", "}
+        </strong>
         Conheça outros praticantes da nobre arte.
-      </h2>
+      </h1>
 
       <div className="flex items-center gap-2">
         <Search placeholder="Pesquise por pessoas" />

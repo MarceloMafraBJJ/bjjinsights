@@ -10,8 +10,17 @@ import { LikeButton, PostSlider, Comments } from "@/components/posts";
 import { MenuAside } from "@/components/shared/MenuAside";
 import { Button, ReportButton } from "@/components/shared";
 
-export default async function Post({ params }: { params: { slug: string } }) {
+export default async function Post({
+  searchParams,
+  params,
+}: {
+  searchParams: { page: string };
+  params: { slug: string };
+}) {
   const { slug } = params;
+  const page = parseInt(searchParams.page) || 1;
+
+  console.log(page);
 
   const { post } = (await getData(`posts/${slug}`)) as {
     post: Post;
@@ -81,7 +90,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
           />
 
           <div>
-            <Comments postSlug={post?.slug} />
+            <Comments postSlug={post?.slug} page={page} />
           </div>
         </div>
         <MenuAside />

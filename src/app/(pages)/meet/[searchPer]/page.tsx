@@ -1,17 +1,12 @@
 import { MeetCard } from "@/components/meet";
-import { CategoryList, Featured, Pagination } from "@/components/shared";
+import { Pagination } from "@/components/shared";
 import { MenuAside } from "@/components/shared/MenuAside";
 import { getData } from "@/constants";
 import { User } from "@/types";
 import { getAuthSession } from "@/utils/auth";
 import { redirect } from "next/navigation";
 
-interface searchProps {
-  searchParams: { page: string };
-  params: { searchPer: string };
-}
-
-export default async function searchUserPer({
+export default async function SearchUserPer({
   searchParams,
   params,
 }: {

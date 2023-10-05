@@ -1,6 +1,6 @@
 "use client";
 
-import { fetcher } from "@/constants";
+import { apiUrl, fetcher } from "@/constants";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
@@ -11,7 +11,7 @@ const LikeButton = ({ postId }: { postId: string }) => {
   const { data, status } = useSession();
 
   const { data: likeData, mutate } = useSWR(
-    `http://localhost:3000/api/posts/like?postId=${postId}&userEmail=${data?.user?.email}`,
+    `${apiUrl}/api/posts/like?postId=${postId}&userEmail=${data?.user?.email}`,
     fetcher,
   );
 
