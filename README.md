@@ -1,6 +1,6 @@
 # BJJInsights | Blog de Jiu-Jitsu
 
-![bjjinsights](https://github.com/MarceloMafraBJJ/bjjinsights/assets/84472778/9032280c-ee0a-460d-9f56-bb4a26160d79)
+![bjjinsights](https://github.com/MarceloMafraBJJ/bjjinsights/assets/84472778/9f09144f-6acb-4031-a76d-523c68d85bd1)
 
 Features:
 
